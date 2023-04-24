@@ -70,12 +70,12 @@ function handleMessage(meetingId, socket, message, meetingServer) {
 
 function initMeetingServer(server) {
     const meetingServer = require("socket.io")(server);
-
     meetingServer.on('connection', socket => {
         const meetingId = socket.handshake.query.id;
 
         listenMessage(meetingId, socket, meetingServer);
     });
+    console.log("meetingServer" + meetingServer.id);
 }
 
 module.exports = {

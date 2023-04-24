@@ -60,8 +60,8 @@
  async function checkMeetingExists(meetingId, callback) {
     console.log('checkMeetingExists meeting service ');
 
-    meeting.findById(meetingId)
-    // meeting.findById(meetingId, "hostId, hostName, startTime")
+    // meeting.findById(meetingId)
+    meeting.findById(meetingId, "hostId, hostName, startTime")
         .populate("meetingUsers", "MeetingUser")
         .then((response) => {
             if(!response) callback("Invalid Meeting Id");

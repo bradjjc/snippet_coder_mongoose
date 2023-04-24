@@ -194,16 +194,17 @@ function addUser(socket, {meetingId, userId, name}) {
     let promise = new Promise(function (resolve, reject) {
         meetingServices.getMeetingUser({meetingId, userId}, (error, result) => {
             if(!result) {
+                console.log("addUser meeting-helper !result");
                 var model = {
                     socketId: socket.id,
                     meetingId: meetingId,
                     userId: userId,
-                    joined: true,
+                    joined: true, 
                     name: name,
                     isAlive: true
                 };
                 meetingServices.joinMeeting(model, (error, results) => {
-                    if(result) {
+                    if(results) {
                         resolve(true);
                     }
                     if(error) {
@@ -212,11 +213,12 @@ function addUser(socket, {meetingId, userId, name}) {
                 });
             }
             else {
+                console.log("addUser meeting-helper result okok");
                 meetingServices.updateMeetingUser({
                     userId: userId,
                     socketId: socket.id,
                 }, (error, results) => {
-                    if(result) {
+                    if(results) {
                         resolve(true);
                     }
                     if(error) {
